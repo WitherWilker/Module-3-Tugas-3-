@@ -4,17 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// Class ini berfungsi untuk mengatur dan menyimpan seluruh jadwal kuliah
+/**
+ * Class PengelolaJadwal
+ * ----------------------
+ * Berfungsi untuk menyimpan, menampilkan, dan mengelola seluruh jadwal kuliah.
+ * Di sini terdapat method untuk menambah, mencari, dan menampilkan jadwal.
+ */
 public class PengelolaJadwal {
     private List<MataKuliah> daftarJadwal = new ArrayList<>();
     private Scanner input = new Scanner(System.in);
 
-    // Constructor: langsung isi data awal
+    /** Constructor, otomatis memanggil method isiJadwalAwal() */
     public PengelolaJadwal() {
         isiJadwalAwal();
     }
 
-    // Data awal jadwal kuliah
+    /**
+     * Mengisi jadwal awal (default) ke dalam ArrayList.
+     * Data ini bisa diubah atau ditambah sesuai kebutuhan.
+     */
     private void isiJadwalAwal() {
         daftarJadwal.add(new MataKuliah("Prak. Pemrograman Lanjut", "Senin", "10:20 - 12:10", "LAB EF"));
         daftarJadwal.add(new MataKuliah("Algoritma Pemrograman", "Senin", "14:10 - 16:00", "215 - GKB I"));
@@ -30,7 +38,10 @@ public class PengelolaJadwal {
         daftarJadwal.add(new MataKuliah("Prak. Komunikasi Data", "Jumat", "09:10 - 11:00", "LAB AB"));
     }
 
-    // Menampilkan jadwal hari ini (otomatis baca dari sistem)
+    /**
+     * Menampilkan jadwal kuliah sesuai hari sistem (hari ini).
+     * Mengambil data hari otomatis dari LocalDate.now().
+     */
     public void tampilkanHariIni() {
         LocalDate tanggal = LocalDate.now();
         DayOfWeek day = tanggal.getDayOfWeek();
@@ -51,7 +62,7 @@ public class PengelolaJadwal {
         System.out.println("=============================\n");
     }
 
-    // Menampilkan semua jadwal seminggu penuh
+    /** Menampilkan semua jadwal yang ada di minggu ini. */
     public void tampilkanSemua() {
         System.out.println("\n===== SEMUA JADWAL MINGGU INI =====");
         for (MataKuliah mk : daftarJadwal) {
@@ -60,7 +71,10 @@ public class PengelolaJadwal {
         System.out.println("===================================\n");
     }
 
-    // Mencari mata kuliah berdasarkan keyword
+    /**
+     * Mencari mata kuliah berdasarkan keyword nama.
+     * Hasil pencarian akan menampilkan semua matkul yang mengandung kata tersebut.
+     */
     public void cariMataKuliah() {
         System.out.print("\n🔍 Masukkan nama mata kuliah yang ingin dicari: ");
         String keyword = input.nextLine().toLowerCase();
@@ -76,7 +90,10 @@ public class PengelolaJadwal {
         if (!ditemukan) System.out.println("❌ Mata kuliah tidak ditemukan.");
     }
 
-    // Menambahkan jadwal baru lewat input user
+    /**
+     * Menambahkan jadwal baru berdasarkan input user.
+     * Menggunakan try-catch untuk mencegah error saat input kosong.
+     */
     public void tambahJadwal() {
         try {
             System.out.print("Nama mata kuliah: ");
@@ -98,7 +115,11 @@ public class PengelolaJadwal {
         }
     }
 
-    // Mengubah nama hari dari Inggris ke Bahasa Indonesia
+    /**
+     * Mengubah nama hari (dalam bahasa Inggris) menjadi Bahasa Indonesia.
+     * @param day hari dalam format DayOfWeek
+     * @return nama hari dalam Bahasa Indonesia
+     */
     private String ubahHari(DayOfWeek day) {
         switch (day) {
             case MONDAY: return "Senin";
